@@ -1,17 +1,26 @@
 language: c
 
 sudo: true
-
-os:
-  - linux
-  - osx
-
-addons:
-  apt:
-    packages:
-      - expect
-      - lib64readline6-dev
-      - libtool
+  
+matrix:
+  include:
+    - arch: amd64
+      addons:
+        apt:
+          packages:
+           - expect
+           - lib64readline6-dev
+           - libtool
+    - arch: ppc64le
+      addons:
+        apt:
+          packages:
+           - expect
+           - libreadline-dev
+           - libtool
+           - tcl-dev
+           - tk-dev
+    - os: osx
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
